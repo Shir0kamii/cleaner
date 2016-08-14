@@ -73,6 +73,10 @@ class DirectoryTraversalShell(Cmd):
 
 class FileActionShell(DirectoryTraversalShell):
 
+    def default(self, line):
+        super().default(line)
+        return IterationCommand.keep
+
     def do_EOF(self, _):
         return IterationCommand.quit
 
