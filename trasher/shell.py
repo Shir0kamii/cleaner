@@ -1,0 +1,70 @@
+from cmd import Cmd
+import os
+
+from .filesystem import traversal, remove, move
+
+ERROR_IGNORE = (KeyboardInterrupt,)
+ERROR_PRINT = (Exception,)
+
+def launch_shell(directory):
+    shell = FileActionShell()
+    try:
+        shell.launch(directory)
+    except ERROR_IGNORE:
+        pass
+    except ERROR_PRINT as e:
+        print("FATAL ERROR: {}".format(e))
+
+class DirectoryTraversalShell(Cmd):
+
+    def launch(self, directory):
+        self.traversal_argument = None
+        self.file_iterator = traversal(directory)
+        if not self.iter_file():
+            return
+        self.set_prompt()
+        self.cmdloop()
+
+    def iter_file(self):
+        try:
+            self.file = self.file_iterator.send(self.traversal_argument)
+        except StopIteration:
+            return False
+        return True
+
+    def set_prompt(self):
+        self.prompt = "{} > ".format(self.file)
+
+    def postcmd(self, stop, line):
+        if not self.iter_file():
+            return True # exits
+
+        self.set_prompt()
+        self.traversal_argument = None
+        return stop
+
+
+class FileActionShell(DirectoryTraversalShell):
+
+    def do_EOF(self, _):
+        return True
+
+    def emptyline(self):
+        pass
+
+    def do_none(self, _):
+        pass
+
+    def do_enter(self, _):
+        self.traversal_argument = True
+
+    def do_quit(self, line):
+        return True
+
+    def do_remove(self, _):
+        remove(self.file)
+
+    def do_move(self, destination):
+        move(self.file, destination)
+
+
