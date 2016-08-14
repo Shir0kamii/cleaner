@@ -19,7 +19,7 @@ def remove(entry):
         os.remove(entry)
 
 def move(entry, destination):
-     pass
+    shutil.move(entry, destination)
 
 def traversal(directory):
     for entry in listdir_with_prefix(directory):
