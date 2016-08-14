@@ -1,3 +1,5 @@
+.. image:: https://img.shields.io/pypi/v/cleaner.svg?maxAge=3600   :target: https://github.com/Shir0kamii/cleaner
+
 #######
 Cleaner
 #######
