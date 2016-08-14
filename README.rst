@@ -1,9 +1,13 @@
-# Cleaner
+#######
+Cleaner
+#######
 
 Cleaner is a cool interactive shell that allows you to clean your directories
 with less eforts.
 
-## Why Cleaner ?
+=============
+Why Cleaner ?
+=============
 
 Have you ever been tired to clean a messy `~/Downloads/` directory ? Do you
 think this bunch of `ls` and `rm <file>` or `mv <file> <destination>` are
@@ -13,7 +17,9 @@ Cleaner solve exactly this problem, submiting to you each file of the directory
 you want to clean, and reducing the commands to type to `rm` and `mv
 <destination>`.
 
-## Usage
+=====
+Usage
+=====
 
 Use `cleaner <directory>` to clean a messy directory
 
