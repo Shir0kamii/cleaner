@@ -42,9 +42,11 @@ will recursively remove all its tree.
 Use `mv <destination>` to move an entry to `<destination>`. If it's used on
 a directory, it will recursively move all its tree to `<destination>`.
 
-Use `chmod <mode>` to modify permissions of a file or directory.
+Use `chmod <mode>` to modify permissions of a file or directory. The shell will
+keep the same file after this command.
 
-Use `chown <user>[:<group>]` to modify ownership of the file or directory. 
+Use `chown <user>[:<group>]` to modify ownership of the file or directory. The
+shell will keep the same file after this command.
 
 If you don't type anything, the shell will go to the next element. This same
 effect will take place if you type `pass`.

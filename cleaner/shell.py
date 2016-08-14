@@ -114,6 +114,7 @@ class FileActionShell(DirectoryTraversalShell):
     def do_chmod(self, mode):
         mode = filemode_argument(mode)
         os.chmod(self.file, mode)
+        return IterationCommand.keep
 
     @parsed_arguments_method
     def do_chown(self, user_group_string):
@@ -123,3 +124,4 @@ class FileActionShell(DirectoryTraversalShell):
         else:
             user, group = user_group
         shutil.chown(self.file, user, group)
+        return IterationCommand.keep
