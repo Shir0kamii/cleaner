@@ -1,4 +1,5 @@
 from cmd import Cmd
+from enum import Enum
 import os
 import shlex
 import shutil
@@ -33,6 +34,12 @@ def launch_shell(directory):
         print("FATAL ERROR: {}".format(e))
 
 
+class IterationCommand(Enum):
+    keep = 0
+    next = 1
+    quit = 2
+
+
 class DirectoryTraversalShell(Cmd):
 
     def launch(self, directory):
@@ -53,31 +60,33 @@ class DirectoryTraversalShell(Cmd):
     def set_prompt(self):
         self.prompt = "{} > ".format(self.file)
 
-    def postcmd(self, stop, line):
-        if not self.iter_file():
+    def postcmd(self, iter_cmd, line):
+        if iter_cmd is None:
+            iter_cmd = IterationCommand.next
+        if (iter_cmd == IterationCommand.quit or
+                (iter_cmd == IterationCommand.next and not self.iter_file())):
             return True # exits
 
         self.set_prompt()
         self.traversal_argument = None
-        return stop
 
 
 class FileActionShell(DirectoryTraversalShell):
 
     def do_EOF(self, _):
-        return True
+        return IterationCommand.quit
 
     def emptyline(self):
-        pass
+        return IterationCommand.next
 
     def do_pass(self, _):
-        pass
+        return IterationCommand.next
 
     def do_enter(self, _):
         self.traversal_argument = True
 
     def do_quit(self, line):
-        return True
+        return IterationCommand.quit
 
     @parsed_arguments_method
     def do_rm(self):
