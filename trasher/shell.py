@@ -14,6 +14,9 @@ def parsed_arguments_method(method):
         return method(self, *shlex.split(line))
     return new_method
 
+def filename_argument(argument):
+    return os.path.expanduser(argument)
+
 def launch_shell(directory):
     shell = FileActionShell()
     try:
@@ -74,7 +77,8 @@ class FileActionShell(DirectoryTraversalShell):
         remove(self.file)
 
     @parsed_arguments_method
-    def do_move(self, destination):
+    def do_move(self, filename):
+        destination = filename_argument(filename)
         move(self.file, destination)
 
 
