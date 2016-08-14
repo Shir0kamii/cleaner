@@ -10,7 +10,6 @@ ERROR_PRINT = (Exception,)
 
 def parsed_arguments_method(method):
     def new_method(self, line):
-        print(shlex.split(line))
         return method(self, *shlex.split(line))
     return new_method
 
