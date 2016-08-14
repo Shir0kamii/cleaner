@@ -17,6 +17,7 @@ def parsed_arguments_method(method):
 def filename_argument(argument):
     return os.path.expanduser(argument)
 
+
 def launch_shell(directory):
     shell = FileActionShell()
     try:
@@ -25,6 +26,7 @@ def launch_shell(directory):
         pass
     except ERROR_PRINT as e:
         print("FATAL ERROR: {}".format(e))
+
 
 class DirectoryTraversalShell(Cmd):
 
@@ -80,5 +82,3 @@ class FileActionShell(DirectoryTraversalShell):
     def do_move(self, filename):
         destination = filename_argument(filename)
         move(self.file, destination)
-
-
