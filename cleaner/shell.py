@@ -94,6 +94,8 @@ class FileActionShell(DirectoryTraversalShell):
         return IterationCommand.next
 
     def do_enter(self, _):
+        if not os.path.isdir(self.file):
+            return self.error("enter command must be used on a directory")
         self.traversal_argument = True
 
     def do_quit(self, line):
