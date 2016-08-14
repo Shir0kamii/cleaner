@@ -3,6 +3,7 @@ from enum import Enum
 import os
 import shlex
 import shutil
+import sys
 
 from .filesystem import traversal, remove, move
 
@@ -74,7 +75,13 @@ class DirectoryTraversalShell(Cmd):
 class FileActionShell(DirectoryTraversalShell):
 
     def default(self, line):
-        super().default(line)
+        return self.error("Unknow Syntax: {}", line)
+
+    def error(self, error_msg=None, *args, **kwargs):
+        if not error_msg:
+            error_msg = "Unknow Error"
+        error_msg = "*** " + error_msg.format(*args, **kwargs)
+        print(error_msg, file=sys.stderr)
         return IterationCommand.keep
 
     def do_EOF(self, _):
