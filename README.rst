@@ -29,7 +29,12 @@ A shell will be spawn, with the prompt containing a filename. The command you
 will type will take effect on this file. Next, another filename will be prompted
 and each file of the directory will be submited to you this way.
 
+Directories end with a '/' character on the prompt.
+
 To exit the shell, you can either type `quit`, `Ctrl-D` or `Ctrl-C`.
+
+Use `enter` on a directory to list its tree. The directory will be printed
+again after the traversal.
 
 Use `rm` on a filename to remove an entry. If it's used on a directory, it
 will recursively remove all its tree.
