@@ -1,10 +1,18 @@
 from cmd import Cmd
 import os
+import shlex
 
 from .filesystem import traversal, remove, move
 
 ERROR_IGNORE = (KeyboardInterrupt,)
 ERROR_PRINT = (Exception,)
+
+
+def parsed_arguments_method(method):
+    def new_method(self, line):
+        print(shlex.split(line))
+        return method(self, *shlex.split(line))
+    return new_method
 
 def launch_shell(directory):
     shell = FileActionShell()
@@ -61,9 +69,11 @@ class FileActionShell(DirectoryTraversalShell):
     def do_quit(self, line):
         return True
 
-    def do_remove(self, _):
+    @parsed_arguments_method
+    def do_remove(self):
         remove(self.file)
 
+    @parsed_arguments_method
     def do_move(self, destination):
         move(self.file, destination)
 
