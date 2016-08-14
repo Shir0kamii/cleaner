@@ -1,6 +1,7 @@
 from cmd import Cmd
 import os
 import shlex
+import shutil
 
 from .filesystem import traversal, remove, move
 
@@ -91,3 +92,12 @@ class FileActionShell(DirectoryTraversalShell):
     def do_chmod(self, mode):
         mode = filemode_argument(mode)
         os.chmod(self.file, mode)
+
+    @parsed_arguments_method
+    def do_chown(self, user_group_string):
+        user_group = user_group_string.split(':', 1)
+        if len(user_group) == 1:
+            user, group = user_group[0], None
+        else:
+            user, group = user_group
+        shutil.chown(self.file, user, group)

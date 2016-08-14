@@ -39,5 +39,7 @@ a directory, it will recursively move all its tree to `<destination>`.
 
 Use `chmod <mode>` to modify permissions of a file or directory.
 
+Use `chown <user>[:<group>]` to modify ownership of the file or directory. 
+
 If you don't type anything, the shell will go to the next element. This same
 effect will take place if you type `pass`.
