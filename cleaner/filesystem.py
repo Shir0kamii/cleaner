@@ -24,5 +24,8 @@ def move(entry, destination):
 def traversal(directory):
     for entry in listdir_with_prefix(directory):
         enter = yield entry
-        if enter and os.path.isdir(entry):
+        if not os.path.isdir(entry):
+            continue
+        while enter:
             yield from traversal(entry)
+            enter = yield entry
