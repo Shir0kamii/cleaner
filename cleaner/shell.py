@@ -65,7 +65,7 @@ class FileActionShell(DirectoryTraversalShell):
     def emptyline(self):
         pass
 
-    def do_none(self, _):
+    def do_pass(self, _):
         pass
 
     def do_enter(self, _):
@@ -75,10 +75,10 @@ class FileActionShell(DirectoryTraversalShell):
         return True
 
     @parsed_arguments_method
-    def do_remove(self):
+    def do_rm(self):
         remove(self.file)
 
     @parsed_arguments_method
-    def do_move(self, filename):
+    def do_mv(self, filename):
         destination = filename_argument(filename)
         move(self.file, destination)
