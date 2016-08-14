@@ -13,8 +13,13 @@ def parsed_arguments_method(method):
         return method(self, *shlex.split(line))
     return new_method
 
+
 def filename_argument(argument):
     return os.path.expanduser(argument)
+
+
+def filemode_argument(argument):
+    return int(argument, base=8)
 
 
 def launch_shell(directory):
@@ -81,3 +86,8 @@ class FileActionShell(DirectoryTraversalShell):
     def do_mv(self, filename):
         destination = filename_argument(filename)
         move(self.file, destination)
+
+    @parsed_arguments_method
+    def do_chmod(self, mode):
+        mode = filemode_argument(mode)
+        os.chmod(self.file, mode)
