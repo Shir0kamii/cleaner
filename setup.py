@@ -38,6 +38,11 @@ setup(
     platforms="any",
     packages=find_packages(),
     install_requires=get_dependencies("requirements.txt"),
+    entry_points={
+        'console_scripts': [
+            'cleaner = cleaner.cli:run_cleaner'
+        ]
+    },
     classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
