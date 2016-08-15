@@ -19,6 +19,15 @@ Cleaner solve exactly this problem, submiting to you each file of the directory
 you want to clean, and reducing the commands to type to `rm` and `mv
 <destination>`.
 
+============
+Installation
+============
+
+Via pip
+=======
+
+you can just `pip install cleaner`
+
 =====
 Usage
 =====
