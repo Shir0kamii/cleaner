@@ -1,8 +1,11 @@
 from cmd import Cmd
 from enum import Enum
+import grp
 import os
+import pwd
 import shlex
 import shutil
+import stat
 import sys
 
 from .filesystem import traversal, remove, move
@@ -73,6 +76,7 @@ class DirectoryTraversalShell(Cmd):
 
 
 class FileActionShell(DirectoryTraversalShell):
+    info_template = "{mode} | {user}:{group}"
 
     def default(self, line):
         return self.error("Unknow Syntax: {}", line)
@@ -100,6 +104,17 @@ class FileActionShell(DirectoryTraversalShell):
 
     def do_quit(self, line):
         return IterationCommand.quit
+
+    @parsed_arguments_method
+    def do_info(self):
+        stat_info = os.stat(self.file)
+        file_info = {}
+
+        file_info["mode"] = stat.filemode(stat_info.st_mode)
+        file_info["user"] = pwd.getpwuid(stat_info.st_uid).pw_name
+        file_info["group"] = grp.getgrgid(stat_info.st_gid).gr_name
+        print(self.info_template.format(**file_info))
+        return IterationCommand.keep
 
     @parsed_arguments_method
     def do_rm(self):

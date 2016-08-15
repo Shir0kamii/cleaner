@@ -33,6 +33,10 @@ Directories end with a '/' character on the prompt.
 
 To exit the shell, you can either type `quit`, `Ctrl-D` or `Ctrl-C`.
 
+The `info` command prints a line containing some useful informations. The
+default format is `<mode> | <user>:<group>` wiht `<mode>` being in the same
+format than the first columns of a `ls --long` command in bash.
+
 Use `enter` on a directory to list its tree. The directory will be printed
 again after the traversal.
 
