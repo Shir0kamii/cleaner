@@ -12,14 +12,6 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
-def get_version():
-    if not os.path.isdir(".git"):
-        sys.stderr.write("This does not appear to be a Git repository.")
-        return ""
-    return subprocess.check_output(["git", "describe", "--tags", "--always"],
-                                   universal_newlines=True)[:-1]
-
-
 def get_dependencies(requirements):
     with open(requirements) as requirement_file:
         lines = requirement_file.readlines()
@@ -28,7 +20,7 @@ def get_dependencies(requirements):
 
 setup(
     name="cleaner",
-    version=get_version(),
+    version="0.2.2",
     author="Alexandre Bonnetain",
     author_email="alexandrebonnetain@gmail.com",
     description="Clean your repositories with a cool interactive shell",
