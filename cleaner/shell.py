@@ -69,7 +69,7 @@ class DirectoryTraversalShell(Cmd):
             iter_cmd = IterationCommand.next
         if (iter_cmd == IterationCommand.quit or
                 (iter_cmd == IterationCommand.next and not self.iter_file())):
-            return True # exits
+            return True  # exits
 
         self.set_prompt()
         self.traversal_argument = None

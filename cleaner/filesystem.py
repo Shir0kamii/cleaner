@@ -1,6 +1,7 @@
 import os
 import shutil
 
+
 def listdir_with_prefix(start):
     if not os.path.isdir(start):
         raise ValueError("Must be a directory")
@@ -12,14 +13,17 @@ def listdir_with_prefix(start):
             with_prefix += '/'
         yield with_prefix
 
+
 def remove(entry):
     if os.path.isdir(entry):
         shutil.rmtree(entry)
     else:
         os.remove(entry)
 
+
 def move(entry, destination):
     shutil.move(entry, destination)
+
 
 def traversal(directory):
     for entry in listdir_with_prefix(directory):
