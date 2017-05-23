@@ -20,7 +20,7 @@ def get_dependencies(requirements):
 
 setup(
     name="cleaner",
-    version="0.2.2",
+    version="0.3.0",
     author="Alexandre Bonnetain",
     author_email="alexandrebonnetain@gmail.com",
     description="Clean your repositories with a cool interactive shell",
