@@ -140,3 +140,10 @@ class FileActionShell(DirectoryTraversalShell):
             user, group = user_group
         shutil.chown(self.file, user, group)
         return IterationCommand.keep
+
+    @parsed_arguments_method
+    def do_ls(self):
+        if not os.path.isdir(self.file):
+            return self.error("ls command must be used on a directory")
+        for entry in os.listdir(self.file):
+            print(entry)
