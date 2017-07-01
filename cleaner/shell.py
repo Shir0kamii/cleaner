@@ -147,3 +147,4 @@ class FileActionShell(DirectoryTraversalShell):
             return self.error("ls command must be used on a directory")
         for entry in os.listdir(self.file):
             print(entry)
+        return IterationCommand.keep
