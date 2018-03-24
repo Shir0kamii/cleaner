@@ -105,6 +105,10 @@ class FileActionShell(DirectoryTraversalShell):
     def do_quit(self, line):
         return IterationCommand.quit
 
+    def do_help(self, line):
+        super().do_help(line)
+        return IterationCommand.keep
+
     @parsed_arguments_method
     def do_info(self):
         stat_info = os.stat(self.file)
