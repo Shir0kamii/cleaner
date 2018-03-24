@@ -148,3 +148,12 @@ class FileActionShell(DirectoryTraversalShell):
         for entry in os.listdir(self.file):
             print(entry)
         return IterationCommand.keep
+
+    @parsed_arguments_method
+    def do_cat(self):
+        if not os.path.isfile(self.file):
+            return self.error("{file} must be a file")
+        with open(self.file) as fp:
+            for line in fp:
+                print(line.rstrip())
+        return IterationCommand.keep
