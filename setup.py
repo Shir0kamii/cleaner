@@ -12,7 +12,7 @@ def read(fname):
 
 setup(
     name="cleaner",
-    version="0.3.1",
+    version="0.4.0",
     url="https://github.com/Shir0kamii/cleaner",
     author_email="shir0kamii@gmail.com",
     description="Cleaner is a cool interactive shell that allows you to "
